@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Contact Details Page</title>
+	
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+</head>
+<body>
+	
+	<section>
+		
+		<div th:if="${session.message}" class="container">
+				
+				
+				<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role=""alert>
+					
+					<span th:text="${session.message.content}"></span>
+					
+				</div>
+				
+				<th:block th:remove="${all}"></th:block>
+				<script th:inline="javascript">
+						        setTimeout(function() {
+						            document.querySelector('.alert').style.display = 'none';
+						        }, 2000);
+				</script>
+				
+			</div>
+
+		<div class="card mx-auto" style="width: 75%;">
+			
+			<div class="card-body" th:if="${contact}">
+			
+				<div class="container text-center">
+					
+					<img style="height: 200px; width: 200px;" class="my_profile_picture " th:src="@{'/image/'+${contact.image}}" alt="profile image">
+					
+					<h3 class="mt-3">
+						<span th:text="${contact.name}"></span>
+					</h3>
+					
+					
+					
+				<table class="table mx-auto" style="width: 100%;">
+				  
+				  <thead class="thead-light">
+				  
+				    <tr>
+				  
+				      <th scope="col">#ID</th>
+				      <th scope="col">SCMUSER<span th:text="${contact.cid}"></span></th>
+				  
+				    </tr>
+				  
+				  </thead>
+				  
+				  <tbody>
+				  
+				    <tr>
+				  
+				      <th scope="row">Email</th>
+				  
+				      <td>
+						  <span th:text="${contact.email}"></span>
+					  </td>
+				  
+				    </tr>
+				    
+				    <tr>
+				  
+				      <th scope="row">Phone</th>
+				  
+				      <td>
+						  <span th:text="${contact.phone}"></span>
+					  </td>
+				  
+				    </tr>
+				    
+				    <tr>
+				  
+				      <th scope="row">Work</th>
+				  
+				      <td>
+						  <span th:text="${contact.work}"></span>
+					  </td>
+				  
+				    </tr>
+				    
+				    <tr>
+				  
+				      <th scope="row">About</th>
+				  
+				      <td>
+						  <th:block th:utext="${contact.description}"></th:block>
+					  </td>
+				  
+				    </tr>
+				    
+				    
+				  
+				  </tbody>
+
+				</table>
+					
+					<div style="display: flex; justify-content: center;">
+						
+				<button class="btn  btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete Contact">
+		            <a class="viewbutton" th:onclick="|deleteContact(${contact.cid})|">
+	                	Delete
+					</a>
+				</button>
+							
+				<form method="post" th:action="@{'/user/update-contact/'+${contact.cid}}" class="ml-2 mr-2">
+					<button type="submit" class="btn  btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+					    title="Update Contact">
+						  Update
+					</button>
+				</form>
+					</div>
+
+					
+				</div>
+			</div>
+			
+			<div class="unauthorizedbody" th:unless="${contact}">
+				
+				<div class="unauthorizedmessage">You are not authorized.
+					  </div>
+					  <div class="unauthorizedmessage2">You tried to access a contact which you dont have access to</div>
+					  <div class="container" id="unauthorizedcontainer">
+					    <div class="neon">403</div>
+					    <div class="door-frame">
+					      <div class="door">
+					        <div class="rectangle">
+					      </div>
+					        <div class="handle">
+					          </div>
+					        <div class="window">
+					          <div class="eye">
+					          </div>
+					          <div class="eye eye2">
+					          </div>
+					          <div class="leaf">
+					          </div> 
+					        </div>
+					      </div>  
+					    </div>
+				</div>
+			</div>
+			
+			
+			
+			
+		</div>
+		
+		
+	</section>
+	
+	
+</body>
+</html>

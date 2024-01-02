@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Settings Page</title>
+</head>
+<body>
+	
+	<section>
+		
+		<div th:if="${session.message}" class="container">
+				
+				
+				<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role=""alert>
+					
+					<span th:text="${session.message.content}"></span>
+					
+				</div>
+				
+				<th:block th:remove="${all}"></th:block>
+				<script th:inline="javascript">
+						        setTimeout(function() {
+						            document.querySelector('.alert').style.display = 'none';
+						        }, 2000);
+				</script>
+				
+			</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-body">
+							
+							
+							<h3 class="mb-3">Change UserName</h3>
+							
+							<form action="" th:action="@{/user/change-userName}" method="post">
+								
+								<!--old password field-->
+								<div class="form-group">
+									
+									<input name="olduserName" type="email" class="form-control" placeholder="Enter old userName">
+									
+								</div>
+								
+								
+								<!--new password field-->
+								<div class="form-group mt-3">
+									
+									<input  name="newuserName" type="email" class="form-control" placeholder="Enter new userName">
+									
+								</div>
+								
+								<div class="container text-center">
+									
+									<button type="submit" class="btn btn-success">
+										change
+									</button>
+									
+									<button type="reset" class="btn btn-warning">
+										Reset
+									</button>
+									
+								</div>
+								
+							</form>
+							
+							
+							
+							<h3 class="mb-3 mt-5">Change Password</h3>
+							
+							<form action="" th:action="@{/user/change-password}" method="post">
+								
+								<!--old password field-->
+								<div class="form-group">
+									
+									<input name="oldPassword" type="password" class="form-control" placeholder="Enter old Password">
+									
+								</div>
+								
+								
+								<!--new password field-->
+								<div class="form-group mt-3">
+									
+									<input  name="newPassword" type="password" class="form-control" placeholder="Enter new Password">
+									
+								</div>
+								
+								<div class="container text-center">
+									
+									<button type="submit" class="btn btn-success">
+										change
+									</button>
+									
+									<button type="reset" class="btn btn-warning">
+										Reset
+									</button>
+									
+								</div>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<script>
+			
+			$(document).ready(() => {				
+				$('.item').removeClass('active');
+				$("#settings-link").addClass("active");
+			});
+			
+			
+		</script>
+		
+	</section>
+	
+	
+</body>
+</html>

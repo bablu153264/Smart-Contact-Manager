@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Prifile Page</title>
+</head>
+<body>
+	
+	<section>
+		
+		<div th:if="${session.message}" class="container">
+				
+				
+				<div th:classappend="${'alert-'+session.message.type}" class="alert text-center" role=""alert>
+					
+					<span th:text="${session.message.content}"></span>
+					
+				</div>
+				
+				<th:block th:remove="${all}"></th:block>
+				<script th:inline="javascript">
+						        setTimeout(function() {
+						            document.querySelector('.alert').style.display = 'none';
+						        }, 2000);
+				</script>
+				
+			</div>
+	
+	<div class="container">
+		<div class="card mx-auto" style="width: 75%;">
+			<div class="card-body">
+				
+				<div class="container text-center">
+					
+					<img style="height: 200px; width: 200px;" class="my_profile_picture " th:src="@{'/image/'+${user.imageUrl}}" alt="profile image">					
+					
+				</div>
+				
+				
+				<h3 class="text-center mt-3 mb-2">
+						<span th:text="${user.name}"></span>
+					</h3>
+				
+				
+				<div class="table-responsive">
+									
+					<table class="table mx-auto text-center" style="width: 100%;">
+							  
+							  <thead class="thead-light">
+							  
+							    <tr>
+							  
+							      <th scope="col">#USERID</th>
+							      <th scope="col">SCMUSER<span th:text="${user.id}"></span></th>
+							  
+							    </tr>
+							  
+							  </thead>
+							  
+							  <tbody>
+							  
+							    <tr>
+							  
+							      <th scope="row">Email</th>
+							  
+							      <td>
+									  <span th:text="${user.email}"></span>
+								  </td>
+							  
+							    </tr>
+							    
+							    <tr>
+							  
+							      <th scope="row">Role</th>
+							  
+							      <td>
+									  <span th:text="${user.role}"></span>
+								  </td>
+							  
+							    </tr>
+							    
+							    <tr>
+							  
+							      <th scope="row">Account Active</th>
+							  
+							      <td>
+									  <span th:text="${user.enabled}"></span>
+								  </td>
+							  
+							    </tr>
+							    
+							    <tr>
+							  
+							      <th scope="row">About </th>
+							  
+							      <td>
+									  <span th:utext="${user.about}"></span>
+								  </td>
+							  
+							    </tr>
+							    
+							  </tbody>
+			
+					</table>
+				</div>
+				
+				<div style="display: flex; justify-content: center;">				
+					<form method="post" th:action="@{/user/update-user}" class="ml-2 mr-2">
+						<button type="submit" class="btn  btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+						    title="Update Contact">
+							  Update
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+	</div>
+		
+				<script>
+			
+			$(document).ready(() => {				
+				$('.item').removeClass('active');
+				$("#profile-link").addClass("active");
+			});
+			
+			
+		</script>
+		
+	</section>
+	
+	
+</body>
+</html>
